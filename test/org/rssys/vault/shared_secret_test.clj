@@ -3,13 +3,13 @@
             [matcho.core :refer [match not-match]]
             [org.rssys.vault.shared-secret :as sut]))
 
-(deftest gen-random-bytes-test
+(deftest ^:unit gen-random-bytes-test
   (testing "random data is not equal"
     (let [r1 (sut/gen-random-bytes 10)
           r2 (sut/gen-random-bytes 10)]
       (is (not (= (seq r1) (seq r2)))))))
 
-(deftest gen-secure-password-test
+(deftest ^:unit gen-secure-password-test
   (testing "string is 128 bit strength and random"
     (let [p1 (sut/gen-secure-password)
           p2 (sut/gen-secure-password)]
@@ -17,7 +17,7 @@
       (match (.length p1) 32)
       (match (.length p2) 32))))
 
-(deftest generate-shared-secret-test
+(deftest ^:unit generate-shared-secret-test
   (testing "gen/restore secret based on quorum"
     (let [N      10
           secret (sut/gen-secure-password)]
