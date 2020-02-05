@@ -4,7 +4,7 @@
             [io.pedestal.log :as log])
   (:import (org.bouncycastle.util.encoders Hex)
            (com.tiemens.secretshare.engine SecretShare)
-           (java.security SecureRandom )))
+           (java.security SecureRandom)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; private functions
@@ -55,8 +55,6 @@
   "Generate shared secrets based on given data. data should be java.math.BigInteger number.
   So if we have 32 bytes array of random data we should convert it to BigInteger number.
   returns sequence of Strings (shared secrets in String representation)."
-  ([^java.math.BigInteger data]
-   (split (public-info) data))
   ([pi data]
    (split pi data si->tok))
   ([pi data f]
