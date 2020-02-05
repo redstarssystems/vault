@@ -1,0 +1,35 @@
+# standard (default)
+/target
+/classes
+/checkouts
+*.jar
+*.class
+/.cpcache
+/.lein-*
+/.nrepl-history
+/.nrepl-port
+.hgignore
+.hg/
+
+# folders
+.clj-kondo
+.idea
+log
+logs
+
+# files
+*.iml
+pom.xml
+trace.edn
+.eastwood
+.nrepl-port
+*.vault
+*.zip
+*.tmp
+*.db
+
+# exclusions
+!.clj-kondo/config.edn
+!.idea/codeStyles/codeStyleConfig.xml
+!.idea/codeStyles/Project.xml
+!.idea/clojure-deps.xml
