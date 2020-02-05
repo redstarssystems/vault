@@ -1,4 +1,9 @@
-This program depends on these libraries:
+Red Stars Vault
+Copyright 2020 The Red Stars Systems
 
-1. Secret Share Java © Tim Tiemens
-Distributed under LGPL 2.1 license https://github.com/timtiemens/secretshare
+This file contains information about third party software.
+
+This program includes software from Secret Share Java project
+* Copyright © Tim Tiemens
+* https://github.com/timtiemens/secretshare
+* Licensed under LGPL 2.1
