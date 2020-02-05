@@ -28,6 +28,9 @@
              ;; app state management
              mount                                     {:mvn/version "0.1.16"}
 
+             ;;i18n
+             tongue                                    {:mvn/version "0.2.9"}
+
              ;; crypto
              org.bouncycastle/bcprov-jdk15on           {:mvn/version "1.64"}
              org.bouncycastle/bcpkix-jdk15on           {:mvn/version "1.64"}
