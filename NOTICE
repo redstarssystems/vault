@@ -7,3 +7,8 @@ This program includes software from Secret Share Java project
 * Copyright © Tim Tiemens
 * https://github.com/timtiemens/secretshare
 * Licensed under LGPL 2.1
+
+This program includes software from Bouncy Castle project
+* Copyright (c) 2000 - 2019 The Legion of the Bouncy Castle Inc.
+* https://www.bouncycastle.org
+* Licensed under MIT license
