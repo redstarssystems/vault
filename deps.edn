@@ -1,0 +1,99 @@
+{
+ :mvn/repos {"clojars" {:url "https://repo.clojars.org/"}
+             "central" {:url "https://repo1.maven.org/maven2/"}}
+
+ ;; don't change target/classes (do not remove it from :paths and
+ ;; do not rename it, otherwise edit build.clj)
+ :paths     ["src" "resources" "target/classes"]
+
+ :deps      {
+             org.clojure/clojure                       {:mvn/version "1.10.1"}
+
+             ;; spec
+             org.clojure/spec.alpha                    {:mvn/version "0.2.176"}
+             org.clojure/core.specs.alpha              {:mvn/version "0.2.44"}
+             org.clojure/test.check                    {:mvn/version "0.10.0"}
+             healthsamurai/matcho                      {:mvn/version "0.3.3"}
+
+             ;; environment variables & app config
+             yogthos/config                            {:mvn/version "1.1.7"}
+
+             ;; embedded database
+             com.h2database/h2                         {:mvn/version "1.4.200"}
+             ;; jdbc driver
+             seancorfield/next.jdbc                    {:mvn/version "1.0.13"}
+             ;; jdbc connection pool
+             hikari-cp                                 {:mvn/version "2.10.0"}
+
+             ;; app state management
+             mount                                     {:mvn/version "0.1.16"}
+
+             ;; crypto
+             org.bouncycastle/bcprov-jdk15on           {:mvn/version "1.64"}
+             org.bouncycastle/bcpkix-jdk15on           {:mvn/version "1.64"}
+
+             ;;shared secret
+             com.tiemens/secretshare                   {:mvn/version "1.4.4"}
+
+             ;; metrics, logging
+             org.rssys/metrics                         {:mvn/version "0.1.0" :exclusions [org.slf4j/slf4j-simple
+                                                                                          com.google.code.findbugs/annotations]}
+             org.apache.logging.log4j/log4j-core       {:mvn/version "2.12.1"}
+             org.apache.logging.log4j/log4j-slf4j-impl {:mvn/version "2.12.1"}
+
+             ;; support java 11+
+             org.clojure/core.rrb-vector               {:mvn/version "0.1.1"}
+             }
+
+ :build     {
+             ;; uncomment :java-source-paths and :javac-options if you need to compile java sources
+             ;; :java-source-paths "java-src"
+             ;;  ( default options: ["-cp" "src:target/classes" "-target" "1.8" "-source" "1.8" "-Xlint:-options"] )
+             ;; :javac-options ["-cp" "src:target/classes" "-target" "1.8" "-source" "1.8" "-Xlint:-options"]
+
+             ;; uncomment this if you want to specify uberjar name,
+             ;; otherwise it will be artefact-version-standalone.jar
+             ;;:uberjar-name "vault.jar"
+
+             :omit-source      true
+             :main             "org.rssys.vault.core"
+             :group-id         "org.rssys"
+             :artifact-id      "vault"
+             :artifact-version "0.1.0-SNAPSHOT"
+             }
+
+ :aliases   {
+             :run        {:extra-paths ["resources"]
+                          :jvm-opts    ["-DLOG4J_CONFIGURATION_FILE=resources/log4j2.xml"
+                                        "-Dconfig=dev/resources/config.edn"]
+                          :main-opts   ["--main" "org.rssys.vault.core"]}
+
+             ;; to run repl: clojure -R:bg -A:repl
+             :repl       {:extra-deps  {criterium {:mvn/version "0.4.5"}
+                                        nrepl     {:mvn/version "0.6.0"}
+                                        hashp     {:mvn/version "0.1.1"}}
+                          :jvm-opts    ["-Dconfig=dev/resources/config.edn"]
+                          :extra-paths ["dev/src" "resources" "test"]
+                          :main-opts   ["--main" "nrepl.cmdline"]}
+
+             :test       {:extra-deps  {lambdaisland/kaocha           {:mvn/version "0.0-573"}
+                                        lambdaisland/kaocha-cloverage {:mvn/version "0.0-41"}}
+                          :extra-paths ["resources" "test" "test/resources"]
+                          :jvm-opts    ["-Dconfig=test/resources/config.edn"
+                                        "-DLOG4J_CONFIGURATION_FILE=test/resources/log4j2-test.xml"]
+                          :main-opts   ["--main" "kaocha.runner"]}
+
+             :bg         {:extra-deps {badigeon/badigeon {:git/url "https://github.com/EwenG/badigeon.git"
+                                                          :sha     "c5d7d8f9c44fee2f193ef924cdf8a485aee539c5"
+                                                          }}}
+
+             ;; build uberjar (compile java, clj files): clojure -R:bg -A:uberjar
+             :uberjar    {:main-opts ["-e" "(load-file,\"dev/src/build.clj\"),(build/clean),(build/uberjar)"]}
+
+             ;; compile java classes only: clojure -R:bg -A:javac
+             :javac      {:main-opts ["-e" "(load-file,\"dev/src/build.clj\"),(build/compile-java)"]}
+
+             ;; run on Java 9+ to build standalone app: clojure -R:bg -A:standalone
+             :standalone {:main-opts ["-e" "(load-file,\"dev/src/build.clj\"),(build/clean),(build/standalone)"]}
+             }
+ }

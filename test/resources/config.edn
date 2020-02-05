@@ -1,0 +1,8 @@
+{:vaultconfigtype   "test"                                  ;; dev / test / production
+
+ :dbtype            "h2"
+ :dbuser            "sa"                                    ;; user for db connection
+ :dbsecretfolder    "test/resources/shared-secret"          ;; folder for shared secret which is used to access DB
+ :dbsecretfrom      "folder"                                ;; where to read shared secret from (web or folder)
+ :dbfilename        "./testvaultdb"                         ;; filename for encrypted database
+ }
