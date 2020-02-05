@@ -53,7 +53,7 @@ which can be run by : `$ bin/run.sh` from the root folder of bundle.
 
 ## License
 
-Copyright © 2020 Mike Ananev
+Copyright © 2020 Mike Ananev  
 Red Stars Systems
 
 Distributed under the Apache License 2.0  
